@@ -52,7 +52,7 @@ public class AlertsController
 
         List<Alerts> list=service.findRecentAlerts();
         mv.addObject("alerts", list);
-        mv.setViewName("Alert");
+        mv.setViewName("AlertRecent");
         return mv;
     }
 
@@ -69,13 +69,8 @@ public class AlertsController
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    public ModelAndView findHistoricalAlerts( @ApiParam(value = "vin of the Vehicle", required = true) @PathVariable("vin") String vin) {
-        ModelAndView mv=new ModelAndView();
-
-        List<Alerts> list=service.findHistoricalAlerts(vin);
-        mv.addObject("alerts", list);
-        mv.setViewName("Alert");
-        return mv;
+    public  List<Alerts> findHistoricalAlerts( @ApiParam(value = "vin of the Vehicle", required = true) @PathVariable("vin") String vin) {
+        return service.findHistoricalAlerts(vin);
     }
 
 

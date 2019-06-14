@@ -18,6 +18,8 @@ public class VehicleController {
     @Autowired
     VehicleService service;
 
+
+
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Find All Vehicles",
             notes = "Returns a list of all vehicles available in the database")
@@ -32,7 +34,6 @@ public class VehicleController {
         mv.addObject("vehicles", list);
         mv.setViewName("Vehicle");
         return mv;
-        //return
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{vin}",

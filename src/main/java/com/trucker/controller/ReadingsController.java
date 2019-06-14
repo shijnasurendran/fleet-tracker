@@ -37,14 +37,9 @@ public class ReadingsController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    public ModelAndView findAllByVin(
+    public List<Readings> findAllByVin(
             @ApiParam(value = "Vin of the Car", required = true) @PathVariable("vin") String vin) {
-        ModelAndView mv=new ModelAndView();
-
-        List<Readings> list=service.findAllByVin(vin);
-        mv.addObject("reading", list);
-        mv.setViewName("Reading");
-        return mv;
+        return service.findAllByVin(vin);
     }
 
 
@@ -68,17 +63,22 @@ public class ReadingsController {
 
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/geo/{vin}",
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "Find Vehicle GeoLocation by Vin Number",
-            notes = "Return a single vehicle or throws 404")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Internal Server Error")
-    })
-    public List<Readings> findGeolocation(@ApiParam(value = "vin of the Vehicle", required = true) @PathVariable("vin") String vin) {
-        return service.findGeolocation(vin);
-    }
+
+
+
+
+    
+//    @RequestMapping(method = RequestMethod.GET, value = "/geo/{vin}",
+//            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//    @ApiOperation(value = "Find Vehicle GeoLocation by Vin Number",
+//            notes = "Return a single vehicle or throws 404")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "OK"),
+//            @ApiResponse(code = 404, message = "Not Found"),
+//            @ApiResponse(code = 500, message = "Internal Server Error")
+//    })
+//    public List<Readings> findGeolocation(@ApiParam(value = "vin of the Vehicle", required = true) @PathVariable("vin") String vin) {
+//        return service.findGeolocation(vin);
+//    }
 
 }
