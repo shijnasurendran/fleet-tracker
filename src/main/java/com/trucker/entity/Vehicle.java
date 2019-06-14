@@ -17,7 +17,8 @@ import java.util.UUID;
     "year": 2015,
     "redlineRpm": 5500,
     "maxFuelVolume": 15,
-    "lastServiceDate": "2017-05-25T17:31:25.268Z"
+    "lastServiceDate": "2017-05-25T17:31:25.268Z",
+    "ownerName": "Shijna Surendran"
  },
  {
     "vin": "WP1AB29P63LA60179",
@@ -26,7 +27,8 @@ import java.util.UUID;
     "year": 2015,
     "redlineRpm": 8000,
     "maxFuelVolume": 18,
-    "lastServiceDate": "2017-03-25T17:31:25.268Z"
+    "lastServiceDate": "2017-03-25T17:31:25.268Z",
+    "ownerName": "Siva Sandeep Subramanian"
  }
 ]
 
@@ -40,10 +42,17 @@ public class Vehicle {
 
     @Column(unique = true)
     private String vin;
-
-    private String make,model;
+    private String make,model, ownerName;
     private int year,redlineRpm,maxFuelVolume;
     private Timestamp lastServiceDate;
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
     public Vehicle()
     {
@@ -115,16 +124,17 @@ public class Vehicle {
     }
 
     @Override
-    public String toString()
-    {
-        return "Vehicle{"+"id:"+id+'\''
-                +"vin:"+vin+'\''
-                +"Make:"+make+'\''
-                +"Model:"+model+'\''
-                +"Year:"+year+'\''
-                +"RedLineRPM:"+redlineRpm+'\''
-                +"MaxFuelVolume:"+maxFuelVolume+'\''
-                +"LastServiceDate"+lastServiceDate.toString()
-                ;
+    public String toString() {
+        return "Vehicle{" +
+                "id='" + id + '\'' +
+                ", vin='" + vin + '\'' +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", ownerName='" + ownerName + '\'' +
+                ", year=" + year +
+                ", redlineRpm=" + redlineRpm +
+                ", maxFuelVolume=" + maxFuelVolume +
+                ", lastServiceDate=" + lastServiceDate +
+                '}';
     }
 }

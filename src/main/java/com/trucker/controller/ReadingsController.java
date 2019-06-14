@@ -1,11 +1,13 @@
 package com.trucker.controller;
 
 import com.trucker.entity.Readings;
+import com.trucker.entity.Vehicle;
 import com.trucker.service.ReadingService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -19,13 +21,11 @@ public class ReadingsController {
     ReadingService service;
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Readings create(@RequestBody Readings reading) {
         return service.create(reading);
     }
-
-
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/{vin}",
@@ -37,21 +37,31 @@ public class ReadingsController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    public List<Readings> findAllByVin(
+    public ModelAndView findAllByVin(
             @ApiParam(value = "Vin of the Car", required = true) @PathVariable("vin") String vin) {
-        return service.findAllByVin(vin);
+        ModelAndView mv=new ModelAndView();
+
+        List<Readings> list=service.findAllByVin(vin);
+        mv.addObject("reading", list);
+        mv.setViewName("Reading");
+        return mv;
     }
 
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Find All Readings",
-            notes = "Returns a list of all Readings avaialble in the database")
+            notes = "Returns a list of all Readings available in the database")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    public List<Readings> findAll() {
-        return service.findAll();
+    public ModelAndView findAll() {
+        ModelAndView mv=new ModelAndView();
+
+        List<Readings> list=service.findAll();
+        mv.addObject("reading", list);
+        mv.setViewName("Reading");
+        return mv;
     }
 
 

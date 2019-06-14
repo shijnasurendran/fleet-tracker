@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.truckerproject</groupId>
+  <groupId>com.trucker</groupId>
   <artifactId>trucker-api</artifactId>
   <version>1.0.0</version>
 
@@ -87,6 +87,20 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.12</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-jasper</artifactId>
+      <version>9.0.21</version>
+    </dependency>
+
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+
   </dependencies>
 
   <build>

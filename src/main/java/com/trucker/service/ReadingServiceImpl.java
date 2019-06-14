@@ -38,9 +38,9 @@ public class ReadingServiceImpl implements ReadingService{
     @Transactional
     public Readings create(Readings reading) {
         try {
-            List<Readings> readings = repository.findAllByVin(reading.getVin());
+            //List<Readings> readings = repository.findAllByVin(reading.getVin());
             Vehicle vehicle = vehicleService.findByVin(reading.getVin());
-            checkAlerts(readings,vehicle);
+            checkAlerts(reading,vehicle);
 
         }catch (Exception e)
         {
@@ -81,10 +81,8 @@ public class ReadingServiceImpl implements ReadingService{
     }
 
     @Async
-    void checkAlerts(List<Readings> readings, Vehicle vehicle)
+    void checkAlerts(Readings reading, Vehicle vehicle)
     {
-
-        for (Readings reading:readings) {
             Tires tires = reading.getTires();
             if(reading.getEngineRpm() > vehicle.getRedlineRpm())
             {
@@ -122,9 +120,6 @@ public class ReadingServiceImpl implements ReadingService{
                 alertsService.create(alert);
             }
 
-
-
-        }
     }
 
 }

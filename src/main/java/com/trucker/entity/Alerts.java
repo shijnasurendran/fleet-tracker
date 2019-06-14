@@ -16,7 +16,7 @@ public class Alerts {
 
 
     private Timestamp timestamp;
-    private String Priority;
+    private String priority;
 
     public Alerts()
     {
@@ -48,11 +48,11 @@ public class Alerts {
         this.alertType = alertType;
     }
     public String getPriority() {
-        return Priority;
+        return priority;
     }
 
     public void setPriority(String priority) {
-        Priority = priority;
+        this.priority = priority;
     }
 
     public Timestamp getTimestamp() {

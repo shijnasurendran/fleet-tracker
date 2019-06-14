@@ -7,8 +7,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-
+import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @CrossOrigin
@@ -20,14 +19,20 @@ public class VehicleController {
     VehicleService service;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "Find All Employee",
-            notes = "Returns a list of all vehicles avaialble in the database")
+    @ApiOperation(value = "Find All Vehicles",
+            notes = "Returns a list of all vehicles available in the database")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    public List<Vehicle> findAll() {
-        return service.findAll();
+    public ModelAndView findAll() {
+        ModelAndView mv=new ModelAndView();
+
+        List<Vehicle> list=service.findAll();
+        mv.addObject("vehicles", list);
+        mv.setViewName("Vehicle");
+        return mv;
+        //return
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{vin}",
