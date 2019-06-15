@@ -9,5 +9,9 @@
         <module name="trucker-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fleet-management.main" target="1.8" />
+      <module name="fleet-management.test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
