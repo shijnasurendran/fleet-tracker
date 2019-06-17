@@ -1,4 +1,3 @@
-<%@include file="Header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -6,73 +5,142 @@
 <fmt:setLocale value="${language}"/>
 
 <!DOCTYPE html>
-<html lang="${language}">
-<head>
-  <meta charset="utf-8">
-  <title>Fleet Tracker</title>
-  <style>
-    body {
-    padding-top: 10px;
-    padding-left: 10px;
-    }
-  </style>
-<link rel="icon" href="images/favicon.ico" type="image/png" />
-<link rel="shortcut icon" href="images/favicon.ico" type="image/png" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Fleet Tracker</title>
+      <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="shortcut icon" type="image/png" href="\images\favicon.png"/>
+
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <style>
+      .navbar-dark .navbar-nav .nav-link {
+      color: white;
+
+      }
+	  section{
+	    margin-top:60px;
+	  }
+	  .footer {
+ position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  width: 100%
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #007bff;
+}
+   </style>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-primary" style="width: 100%">
+         <div class="container">
+            <ul class="nav navbar-nav pull-sm-left">
+               <li class="nav-item">
+                   <img src="\images\logo.png" height="63" width="300">
+                  <!--<a class="nav-link" href="#">Fleet Tracker</a>-->
+               </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-logo mx-auto">
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Vehicles</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Readings</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Alerts</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <!-- Page Content -->
+      <div class="container">
+         <div class="row pagination-centered">
+            <div class="col-lg-12 text-center">
+			<section>
+
+               <h5>Readings from Vehicle</h5>
+
+               <div class="col-lg-10 text-center offset-md-1">
+                  <table class="table">
+                     <thead class="">
+                        <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">VIN</th>
+                           <th scope="col">Latitude</th>
+                           <th scope="col">Longitude</th>
+                           <th scope="col">Speed</th>
+                           <th scope="col">Fuel Vol</th>
+                           <th scope="col">Engine HP</th>
+                           <th scope="col">Engine RPM</th>
+                           <th scope="col">Time</th>
+                           <th scope="col">Engine Light</th>
+                           <th scope="col">Coolant</th>
+                           <th scope="col">Cruise Control</th>
+                           <th scope="col">FL Tire Pressure</th>
+                           <th scope="col">FR Tire Pressure</th>
+                           <th scope="col">RL Tire Pressure</th>
+                           <th scope="col">RR Tire Pressure</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                     <c:forEach items="${requestScope.reading}" var="reading">
+                           <tr>
+                           <th scope="row">1</th>
+                             <td>${ reading.vin }</td>
+                             <td>${ reading.latitude }</td>
+                             <td>${ reading.longitude }</td>
+                             <td>${ reading.speed }</td>
+                             <td>${ reading.fuelVolume }</td>
+                             <td>${ reading.engineHp }</td>
+                             <td>${ reading.engineRpm }</td>
+                             <td>${ reading.timestamp }</td>
+                             <td>${ reading.checkEngineLightOn }</td>
+                             <td>${ reading.engineCoolantLow }</td>
+                             <td>${ reading.cruiseControlOn }</td>
+                             <td>${ reading.tires.frontLeft }</td>
+                             <td>${ reading.tires.frontRight }</td>
+                             <td>${ reading.tires.rearLeft }</td>
+                             <td>${ reading.tires.rearRight }</td>
+                           </tr>
+                         </c:forEach>
+
+                    </tbody>
+                  </table>
+               </div>
+			  </section>
+
+            </div>
 
 
-<body>
-<div class="container-fluid"">
-<br>
-<br>
-<br>
-  <h2>List Of Readings Collected</h2>
-  <table class="table table-striped table-bordered table-hover table-condensed" width="500">
-    <tr>
-      <td><b>VIN</b></td>
-      <td><b>Latitude</b></td>
-      <td><b>Longitude</b></td>
-      <td><b>Speed</b></td>
-      <td><b>Fuel Volume</b></td>
-      <td><b>Engine HP</b></td>
-      <td><b>Engine RPM</b></td>
-      <td><b>Time</b></td>
-      <td><b>Engine Light ON</b></td>
-      <td><b>Coolant Low</b></td>
-      <td><b>Cruise Control On</b></td>
-      <td><b>Front Left Tire Pressure</b></td>
-      <td><b>Front Right Tire Pressure</b></td>
-      <td><b>Rear Left Tire Pressure</b></td>
-      <td><b>Rear Right Tire Pressure</b></td>
+        </div>
+
+      </div>
+
+	  <img src="\images\Driving-Car.gif" alt="Smiley face" height="150" width="250">
 
 
-    </tr>
-    <c:forEach items="${requestScope.reading}" var="reading">
-      <tr>
-
-        <td>${ reading.vin }</td>
-        <td>${ reading.latitude }</td>
-        <td>${ reading.longitude }</td>
-        <td>${ reading.speed }</td>
-        <td>${ reading.fuelVolume }</td>
-        <td>${ reading.engineHp }</td>
-        <td>${ reading.engineRpm }</td>
-        <td>${ reading.timestamp }</td>
-        <td>${ reading.checkEngineLightOn }</td>
-        <td>${ reading.engineCoolantLow }</td>
-        <td>${ reading.cruiseControlOn }</td>
-        <td>${ reading.tires.frontLeft }</td>
-        <td>${ reading.tires.frontRight }</td>
-        <td>${ reading.tires.rearLeft }</td>
-        <td>${ reading.tires.rearRight }</td>
-      </tr>
-    </c:forEach>
-  </table>
-
-</div>
-</body>
+	  <footer class="footer">
+           <div class="row footer-bottom">
+            <div class="col-sm-6">
+              <p    style="margin-bottom: 0px;">© 2019. Fleet Tracker. All rights reserved.</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="right" style="margin-bottom: 0px";><a>Contact Us : info@fleettracker.com </a>  |  <a>  Location : Detroit , MI</a>.</p>
+            </div>
+          </div>
+      </footer>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   </body>
 </html>
-<%@include file="Footer.jsp" %>
