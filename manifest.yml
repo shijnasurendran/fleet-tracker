@@ -2,6 +2,6 @@ applications:
   - name: fleet-tracker
     path: build/libs/trucker-api-1.0.0.war
     routes:
-      - route: fleet-tracker.apps.pcf.paltraining.perficient.com
+      - route: fleet-tracker-shijna.apps.pcf.paltraining.perficient.com
     services:
       - tracker-database
