@@ -31,7 +31,7 @@ jobs:
         - chmod +x gradlew
       script:
         - echo "Downloading $RELEASE_TAG"
-        - wget -P build/libs https://github.com/$GITHUB_USERNAME/fleet-management/releases/download/$RELEASE_TAG/trucker-api-1.0.0.war
+        - wget -P build/libs https://github.com/$GITHUB_USERNAME/fleet-tracker/releases/download/$RELEASE_TAG/trucker-api-1.0.0.war
       before_deploy:
         - echo "Deploying $RELEASE_TAG to Cloud Foundry"
       deploy:
